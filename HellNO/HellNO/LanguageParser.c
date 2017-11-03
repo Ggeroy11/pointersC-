@@ -10,10 +10,24 @@ static struct Commandline {
 void parsecmd(int argc, char *argv[], struct Commandline *cmd);
 
 void main(int argc, char *argv[]) {
-	struct Commandline * cmd;
-	parsecmd(argc, argv, cmd);		
+	struct Commandline * cmd = malloc(1);
+	parsecmd(argc, argv, cmd);
 }
 
 void parsecmd(int argc, char *argv[], struct Commandline *cmd) {
-	FILE *fopen(const char *path, const char *mode);
+	scanf("%s",&cmd->Source);
+	scanf("%s", &cmd->Destination);
+	FILE* SourceFile,*DestinationFile;
+	char buf[256];
+	if ((SourceFile = fopen(cmd->Source, "r+")) == NULL) {
+		printf("Error source file not opened");
+	}
+	if ((DestinationFile = fopen(cmd->Destination, "w+")) == NULL) {
+		printf("Error destination file not opened");
+	}
+	while ((fgets(buf, 256, SourceFile)) != NULL)
+	{
+		printf("%s", buf);
+	}
+	fclose(SourceFile);
 }
